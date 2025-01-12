@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 
 app.use(rootRouter);
-app.listen(PORT, () => {
+app.listen(PORT || "4000", () => {
   console.info(`Server started on ${PORT}`);
 });
 
