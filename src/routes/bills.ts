@@ -1,4 +1,4 @@
-import { billsType } from "./../types/billsType";
+import { billsType } from "../types/billsType";
 import { NextFunction, Request, Response, Router } from "express";
 import { billsController } from "../controllers/bills.controllers";
 
