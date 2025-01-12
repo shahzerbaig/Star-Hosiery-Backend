@@ -1,0 +1,15 @@
+-- CreateTable
+CREATE TABLE "Bill" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "date" DATETIME,
+    "amount" REAL NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Collection" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "amount" REAL NOT NULL,
+    "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
