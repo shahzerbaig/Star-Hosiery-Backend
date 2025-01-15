@@ -17,7 +17,7 @@ const corsOption: CorsOptions = {
   optionsSuccessStatus: 204,
 };
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || "4000";
 const app: Express = express();
 
 // Make sure to add these middleware before routes
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 
 app.use(rootRouter);
-app.listen(PORT || "4000", () => {
+app.listen(PORT, () => {
   console.info(`Server started on ${PORT}`);
 });
 
