@@ -19,7 +19,7 @@ const corsOption = {
     preflightContinue: false,
     optionsSuccessStatus: 204,
 };
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || "4000";
 const app = (0, express_1.default)();
 // Make sure to add these middleware before routes
 app.use((0, cors_1.default)());
