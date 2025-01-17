@@ -30,7 +30,7 @@ app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 
 app.use(rootRouter);
 
-checkDatabase();
+console.log(checkDatabase());
 
 app.listen(PORT, () => {
   console.info(`Server started on ${PORT}`);
