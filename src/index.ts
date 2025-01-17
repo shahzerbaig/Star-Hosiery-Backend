@@ -5,6 +5,7 @@ import rootRouter from "./routes/rooted";
 import collectionRouter from "./routes/collection.route";
 import loginRouter from "./routes/login.route";
 import cors, { CorsOptions } from "cors";
+import { checkDatabase } from "./utils/checkDatabase";
 
 const corsOption: CorsOptions = {
   origin: ["https:localhost:4000/"],
@@ -28,6 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 
 app.use(rootRouter);
+
+checkDatabase();
+
 app.listen(PORT, () => {
   console.info(`Server started on ${PORT}`);
 });
