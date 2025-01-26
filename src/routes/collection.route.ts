@@ -13,8 +13,22 @@ collectionRouter.post(
       .then(() =>
         res.status(200).json({ message: "This is /collection route" })
       )
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        res
+          .status(500)
+          .json({ message: "Somthing wrong happed", error: error });
+      });
   }
 );
 
+collectionRouter.get(
+  "/getcollection",
+  (req: Request, res: Response, next: NextFunction) => {
+    collectionController
+      .getCollection()
+      .then((collection) => res.status(200).json({ message: collection }))
+      .catch((error) => console.log("error at get Collection route"));
+  }
+);
 export default collectionRouter;
