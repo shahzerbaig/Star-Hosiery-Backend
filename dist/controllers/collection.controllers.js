@@ -8,22 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const collection_service_1 = __importDefault(require("../service/collection.service"));
+const collection_service_1 = require("../service/collection.service");
 const collectionController = {
     addCollection: (name, amount, mode) => __awaiter(void 0, void 0, void 0, function* () {
         if (!name || !amount || !mode) {
             const newError = new Error();
+            console.log(name, amount, mode);
             throw newError.message;
         }
         try {
-            (0, collection_service_1.default)(name, amount, mode);
+            (0, collection_service_1.addCollection)(name, amount, mode);
         }
         catch (error) {
             console.log(error);
+        }
+    }),
+    getCollection: () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const collection = yield (0, collection_service_1.getCollection)();
+            return collection;
+        }
+        catch (error) {
+            console.log("Error at Collection controller at getCollection");
+            throw error;
         }
     }),
 };

@@ -9,15 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.addCollection = addCollection;
+exports.getCollection = getCollection;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function addCollection(name, amount, mode) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const newDate = new Date();
             const newCollection = yield prisma.collection.create({
                 data: {
                     name: name,
-                    date: new Date(),
+                    date: newDate.toISOString(),
                     amount: amount,
                     mode: mode,
                 },
@@ -29,5 +32,16 @@ function addCollection(name, amount, mode) {
         }
     });
 }
-exports.default = addCollection;
+function getCollection() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const collection = yield prisma.collection.findMany();
+            return collection;
+        }
+        catch (error) {
+            console.error("Error fetching collections:", error);
+            throw error;
+        }
+    });
+}
 //# sourceMappingURL=collection.service.js.map
