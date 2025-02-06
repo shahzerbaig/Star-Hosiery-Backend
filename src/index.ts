@@ -29,7 +29,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.options("*", cors());
+app.options("*", (req: Request, res: Response) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://malicc.store");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200); // Send OK response for preflight
+});
 
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 app.use("/api/auth", authRouter);
