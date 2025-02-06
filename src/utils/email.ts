@@ -1,13 +1,24 @@
 import nodemailer from "nodemailer";
+import mgTransport from "nodemailer-mailgun-transport";
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
+const api_key = process.env.SMTP_PASS_COMPANY as string;
+const domain = process.env.SMTP_COMPANY as string;
+// Configure Mailgun transport
+const mailgunOptions = {
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    api_key: api_key,
+    domain: domain,
   },
-});
+};
+const transporter = nodemailer.createTransport(mgTransport(mailgunOptions));
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST,
+//   port: Number(process.env.SMTP_PORT),
+//   auth: {
+//     user: process.env.SMTP_COMPANY,
+//     pass: process.env.SMTP_PASS_COMPANY,
+//   },
+// });
 
 // Send verification email
 export const sendVerificationEmail = async (email: string, token: string) => {

@@ -9,6 +9,7 @@ import loginRouter from "./routes/login.route";
 import { checkDatabase } from "./utils/checkDatabase";
 import cors, { CorsOptions } from "cors";
 import dotenv from "dotenv";
+import protectionRouter from "./routes/protected";
 
 const corsOption: CorsOptions = {
   origin: ["https:localhost:4000/"],
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 app.use("/api/auth", authRouter);
+app.use(protectionRouter);
 app.use(rootRouter);
 
 console.log(checkDatabase());
