@@ -29,6 +29,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+app.options("*", cors());
+
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 app.use("/api/auth", authRouter);
 app.use(protectionRouter);
