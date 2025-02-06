@@ -1,0 +1,1 @@
+{"version":3,"file":"protected.js","sourceRoot":"","sources":["../../src/routes/protected.ts"],"names":[],"mappings":";;;;;AAAA,qCAAoD;AACpD,mFAAoD;AAEpD,MAAM,gBAAgB,GAAG,IAAA,gBAAM,GAAE,CAAC;AAElC,gBAAgB,CAAC,IAAI,CAAC,YAAY,EAAE,wBAAO,EAAE,CAAC,GAAY,EAAE,GAAa,EAAE,EAAE;IAC3E,GAAG,CAAC,IAAI,CAAC,gBAAgB,CAAC,CAAC;AAC7B,CAAC,CAAC,CAAC;AAEH,kBAAe,gBAAgB,CAAC"}

@@ -14,14 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendResetEmail = exports.sendVerificationEmail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const transporter = nodemailer_1.default.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
+const nodemailer_mailgun_transport_1 = __importDefault(require("nodemailer-mailgun-transport"));
+const api_key = process.env.SMTP_PASS_COMPANY;
+const domain = process.env.SMTP_COMPANY;
+// Configure Mailgun transport
+const mailgunOptions = {
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        api_key: api_key,
+        domain: domain,
     },
-});
+};
+const transporter = nodemailer_1.default.createTransport((0, nodemailer_mailgun_transport_1.default)(mailgunOptions));
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST,
+//   port: Number(process.env.SMTP_PORT),
+//   auth: {
+//     user: process.env.SMTP_COMPANY,
+//     pass: process.env.SMTP_PASS_COMPANY,
+//   },
+// });
 // Send verification email
 const sendVerificationEmail = (email, token) => __awaiter(void 0, void 0, void 0, function* () {
     yield transporter.sendMail({

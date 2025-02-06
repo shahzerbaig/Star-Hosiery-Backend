@@ -12,29 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.protect = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
-const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = req.cookies.token;
-    if (!token)
-        return res.status(401).json({ message: "Not authorized" });
-    try {
-        // Verify token
-        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
-        // Find user
-        const user = yield prisma.user.findUnique({ where: { id: decoded.id } });
-        if (!user)
-            return res.status(401).json({ message: "Not authorized" });
-        // Attach user to request
-        req.user = user;
-        next();
-    }
-    catch (error) {
-        res.status(401).json({ message: "Not authorized" });
-    }
-});
-exports.protect = protect;
+function protect(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const token = req.cookies.token;
+        if (!token)
+            res.status(401).json({ message: "Not authorized" });
+        try {
+            // Verify token
+            const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+            // Find user
+            const user = yield prisma.user.findUnique({ where: { id: decoded.id } });
+            if (!user)
+                res.status(401).json({ message: "Not authorized" });
+            // Attach user to request
+            //req.user = user;
+            next();
+        }
+        catch (error) {
+            res.status(401).json({ message: "Not authorized" });
+        }
+    });
+}
+exports.default = protect;
 //# sourceMappingURL=authMiddleware.js.map

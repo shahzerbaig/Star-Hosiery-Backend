@@ -12,6 +12,7 @@ const collection_route_1 = __importDefault(require("./routes/collection.route"))
 const login_route_1 = __importDefault(require("./routes/login.route"));
 const checkDatabase_1 = require("./utils/checkDatabase");
 const cors_1 = __importDefault(require("cors"));
+const protected_1 = __importDefault(require("./routes/protected"));
 const corsOption = {
     origin: ["https:localhost:4000/"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -31,6 +32,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", [rooted_1.default, collection_route_1.default, login_route_1.default, bills_1.default]);
 app.use("/api/auth", authRoutes_1.default);
+app.use(protected_1.default);
 app.use(rooted_1.default);
 console.log((0, checkDatabase_1.checkDatabase)());
 app.listen(PORT, () => {
