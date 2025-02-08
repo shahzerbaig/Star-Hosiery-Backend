@@ -19,26 +19,24 @@ const app: Express = express();
 // Make sure to add these middleware before routes
 app.use(
   cors({
-    origin: "https://malicc.store", // Allow only your frontend
-    credentials: true, // Allow cookies and authentication headers
-    methods: "GET,POST,PUT,DELETE,OPTIONS", // Specify allowed methods
-    allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
+    origin: "http://localhost:3000", // Explicitly allow your frontend origin
+    credentials: true, // Allow cookies to be sent
   })
 );
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.options("*", (req: Request, res: Response) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://malicc.store");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(200); // Send OK response for preflight
-});
+// app.options("*", (req: Request, res: Response) => {
+//   res.setHeader("Access-Control-Allow-Origin", "https://malicc.store");
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.sendStatus(200); // Send OK response for preflight
+// });
 
 app.use("/api", [rootRouter, collectionRouter, loginRouter, router]);
 app.use("/api/auth", authRouter);
